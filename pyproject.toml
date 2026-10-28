@@ -1,0 +1,44 @@
+[project]
+name = "quest-log-insights"
+version = "0.1.0"
+description = "Turns a Quest Log export into an accomplishments report. FastAPI on Cloudflare Workers; stores nothing."
+authors = [{ name = "Jerry Vrabel", email = "jerry.vrabel.development@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["fastapi>=0.120"]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.16.0",
+    "mypy>=1.18",
+    "pytest>=8.4",
+    "pytest-cov>=7.0",
+    "ruff>=0.14",
+    "workers-py>=1.0",
+    "workers-runtime-sdk>=0.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.32,<1"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers --cov=quest_log_insights --cov-report=term-missing --cov-fail-under=95"
+
+[tool.mypy]
+strict = true
+files = ["src/quest_log_insights", "tests"]
+plugins = ["pydantic.mypy"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "PT", "N", "S", "C4", "DTZ", "PL"]
+ignore = ["PLR2004"]
+allowed-confusables = ["–", "×"]  # typography in the Markdown report
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "PLR2004", "PLR0913"]

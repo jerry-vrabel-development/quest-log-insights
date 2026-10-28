@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "quest-log-insights",
+  // The entry point lives in src/ so Wrangler only uploads the app, not .venv.
+  "main": "src/worker.py",
+  // This date picks the Python version: 2026-09-08 or later runs Python 3.14.
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["python_workers"],
+  "observability": { "enabled": true }
+}
